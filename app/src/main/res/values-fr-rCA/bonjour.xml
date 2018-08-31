@@ -2,8 +2,11 @@
 <resources>
 
     <string name="langue"> bonjour</string>
+
     <string name="hauteur"> hauteur</string>
+
     <string name="largeur"> largeur</string>
+
     <string name="pourGagner"> pour gagner</string>
 
 </resources>

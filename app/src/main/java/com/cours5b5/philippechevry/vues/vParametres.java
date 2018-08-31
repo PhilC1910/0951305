@@ -12,21 +12,26 @@ import com.cours5b5.philippechevry.global.gConstantes;
 public class vParametres extends ConstraintLayout {
 
 
+
     public vParametres(Context context) {
         super(context);
     }
+
 
     public vParametres(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+
     public vParametres(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+
         Spinner spinnerHauteur = this.findViewById(R.id.hauteurNombre);
         ArrayAdapter<Integer> adapterHauteur = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
         spinnerHauteur.setAdapter(adapterHauteur);
@@ -37,6 +42,7 @@ public class vParametres extends ConstraintLayout {
         spinnerHauteur.setSelection(adapterHauteur.getPosition(gConstantes.hauteurDefault));
 
 
+
         Spinner spinnerLargeur = this.findViewById(R.id.largeurNombre);
         ArrayAdapter<Integer> adapterLargeur = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
         spinnerLargeur.setAdapter(adapterLargeur);
@@ -45,6 +51,7 @@ public class vParametres extends ConstraintLayout {
 
         }
         spinnerLargeur.setSelection(adapterLargeur.getPosition(gConstantes.largeurDefault));
+
 
         Spinner spinnerPourGagner = this.findViewById(R.id.pourGagnerNombre);
         ArrayAdapter<Integer> adapterPourGagner = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
