@@ -1,4 +1,5 @@
 
+
 <resources>
 
     <string name="langue">Hello</string>
@@ -8,5 +9,6 @@
     <string name="largeur"> width</string>
 
     <string name="pourGagner"> to win</string>
+
 
 </resources>

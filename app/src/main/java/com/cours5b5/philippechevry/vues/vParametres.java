@@ -27,10 +27,10 @@ public class vParametres extends ConstraintLayout {
         super(context, attrs, defStyleAttr);
     }
 
-
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+
 
         Spinner spinnerHauteur = this.findViewById(R.id.hauteurNombre);
         ArrayAdapter<Integer> adapterHauteur = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
@@ -51,6 +51,7 @@ public class vParametres extends ConstraintLayout {
 
         }
         spinnerLargeur.setSelection(adapterLargeur.getPosition(gConstantes.largeurDefault));
+
 
 
         Spinner spinnerPourGagner = this.findViewById(R.id.pourGagnerNombre);
