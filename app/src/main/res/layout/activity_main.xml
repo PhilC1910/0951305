@@ -79,6 +79,7 @@
         tools:layout_editor_absoluteX="270dp"
         tools:layout_editor_absoluteY="121dp" />
 
+
     <Spinner
         android:id="@+id/largeurNombre"
         android:layout_width="wrap_content"
