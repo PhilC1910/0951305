@@ -1,4 +1,7 @@
 
 <resources>
     <string name="langue">Hello</string>
+    <string name="hauteur"> height</string>
+    <string name="largeur"> width</string>
+    <string name="pourGagner"> to win</string>
 </resources>

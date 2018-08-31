@@ -1,10 +1,12 @@
-package com.cours5b5.philippechevry;
+package com.cours5b5.philippechevry.activites;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class MainActivity extends AppCompatActivity {
+import com.cours5b5.philippechevry.R;
+
+public class aActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
