@@ -11,7 +11,7 @@ public class gConstantes {
     public static int largeurMin = 4;
     public static int largeurMax = 10;
     public static int largeurDefault = 7;
-    
+
     public static int pourGagnerMin = 3;
     public static int pourGagnerMax = 4;
     public static int pourGagnerDefault = 4;
