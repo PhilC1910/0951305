@@ -11,6 +11,7 @@ import com.cours5b5.philippechevry.R;
 import com.cours5b5.philippechevry.activites.AActivity;
 import com.cours5b5.philippechevry.activites.AMenuPrincipal;
 import com.cours5b5.philippechevry.global.gConstantes;
+import com.cours5b5.philippechevry.modeles.MParametres;
 
 public class VParametres extends Vue {
 
@@ -34,38 +35,15 @@ public class VParametres extends Vue {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
-
-        Spinner spinnerHauteur = this.findViewById(R.id.hauteurNombre);
-        ArrayAdapter<Integer> adapterHauteur = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
-        spinnerHauteur.setAdapter(adapterHauteur);
-        for(int i = gConstantes.hauteurMin ;i < gConstantes.hauteurMax ; i++){
-            adapterHauteur.add(i);
-
+        try {
+            MParametres.class.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
-        spinnerHauteur.setSelection(adapterHauteur.getPosition(gConstantes.hauteurDefault));
 
-
-
-        Spinner spinnerLargeur = this.findViewById(R.id.largeurNombre);
-        ArrayAdapter<Integer> adapterLargeur = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
-        spinnerLargeur.setAdapter(adapterLargeur);
-        for(int i = gConstantes.largeurMin ;i < gConstantes.largeurMax ; i++){
-            adapterLargeur.add(i);
-
-        }
-        spinnerLargeur.setSelection(adapterLargeur.getPosition(gConstantes.largeurDefault));
-
-
-
-        Spinner spinnerPourGagner = this.findViewById(R.id.pourGagnerNombre);
-        ArrayAdapter<Integer> adapterPourGagner = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
-        spinnerPourGagner.setAdapter(adapterPourGagner);
-        for(int i = gConstantes.pourGagnerMin ;i < gConstantes.pourGagnerMax ; i++){
-            adapterPourGagner.add(i);
-
-        }
-        spinnerPourGagner.setSelection(adapterPourGagner.getPosition(gConstantes.pourGagnerDefault));
+        
 
     }
 
