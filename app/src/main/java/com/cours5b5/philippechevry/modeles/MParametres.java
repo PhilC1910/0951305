@@ -1,9 +1,11 @@
 package com.cours5b5.philippechevry.modeles;
 
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.cours5b5.philippechevry.R;
+
 import com.cours5b5.philippechevry.global.gConstantes;
 import com.cours5b5.philippechevry.serialisation.AttributSerialisable;
 
@@ -13,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MParametres extends Modele {
+
+    public static  MParametres instance = new MParametres();
 
     @AttributSerialisable
     public Integer hauteur;
@@ -31,7 +35,9 @@ public class MParametres extends Modele {
     private List<Integer> choixPourGagner;
 
     public MParametres(){
-
+        genererListeChoixPourGagner();
+        genererListeChoixLargeur();
+        genererListeChoixHauteur();
     }
 
     public List<Integer> getChoixHauteur() {
@@ -69,28 +75,31 @@ public class MParametres extends Modele {
         this.pourGagner = pourGagner;
     }
 
-    private void genererLiteDeChoix(){
+    public void genererListeDeChoix(){
+
+
         genererListeChoixHauteur();
         genererListeChoixLargeur();
         genererListeChoixPourGagner();
     }
 
-    private List<Integer> genererLiteDeChoix(int min, int max){
+    private List<Integer> genererListeDeChoix(int min, int max){
         List<Integer> list =new ArrayList<>();
-        for(int indice = min ;indice <= max ;indice++){
+        for(int indice = min ;indice <= max ;indice++) {
             list.add(indice);
         }
         return list;
     }
 
-    private void genererListeChoixHauteur(){
-        choixHauteur = genererLiteDeChoix(gConstantes.hauteurMin,gConstantes.hauteurMax);
+
+    public void genererListeChoixHauteur(){
+        choixHauteur = genererListeDeChoix(gConstantes.hauteurMin,gConstantes.hauteurMax);
     }
-    private void genererListeChoixLargeur(){
-        choixLargeur = genererLiteDeChoix(gConstantes.largeurMin,gConstantes.largeurMax);
+    public void genererListeChoixLargeur(){
+        choixLargeur = genererListeDeChoix(gConstantes.largeurMin,gConstantes.largeurMax);
     }
-    private void genererListeChoixPourGagner(){
-        choixPourGagner = genererLiteDeChoix(gConstantes.pourGagnerMin,gConstantes.pourGagnerMax);
+    public void genererListeChoixPourGagner(){
+        choixPourGagner = genererListeDeChoix(gConstantes.pourGagnerMin,gConstantes.pourGagnerMax);
     }
     @Override
     public void aPartirObjetJson(Map<String, Object> objetJson) {
@@ -98,9 +107,9 @@ public class MParametres extends Modele {
           String cle = entry.getKey();
           Object valeur = entry.getValue();
 
-            if (cle == _hauteur){
+            if (cle.equals( _hauteur)){
              hauteur = Integer.valueOf((String) entry.getValue());
-            }else if(cle == _largeur){
+            }else if(cle.equals( _largeur)){
                 largeur = Integer.valueOf((String) entry.getValue());
             }else{
                 pourGagner = Integer.valueOf((String) entry.getValue());
@@ -112,7 +121,6 @@ public class MParametres extends Modele {
     public Map<String, Object> enObjetJson() {
 
         Map<String,Object> objetJson  = new HashMap<>();
-
         objetJson.put(_hauteur,hauteur.toString());
         objetJson.put(_largeur,largeur.toString());
         objetJson.put(_pourGagner, pourGagner.toString());

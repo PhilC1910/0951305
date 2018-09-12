@@ -29,31 +29,64 @@ public class AActivity extends Activite{
         setContentView(R.layout.activity_main);
 
 
-        if(savedInstanceState != null){
-            MParametres monModele = new MParametres();
-            String json = savedInstanceState.getString(this.getClass().getSimpleName());
-            Map<String,Object>objetJson = Jsonification.enObjetJson(json);
-            monModele.aPartirObjetJson(objetJson);
-        }
+
         Spinner spinnerHauteur = this.findViewById(R.id.hauteurNombre);
-        spinnerHauteur.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinnerHauteur.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String lechoix = (String) parent.getAdapter().getItem(position);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String choixHauteur = (adapterView.getAdapter().getItem(i).toString());
+                MParametres.instance.setHauteur(Integer.parseInt(choixHauteur));
             }
 
-
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
+
         Spinner spinnerLargeur = this.findViewById(R.id.largeurNombre);
-        Spinner spinnerPourGagner = this.findViewById(R.id.pourGagner);
-        MParametres monModele = new MParametres();
-        Map<String,Object> objetJson = monModele.enObjetJson();
-        String json = Jsonification.enChaine(objetJson);
-        monModele.aPartirObjetJson(objetJson);
+        spinnerLargeur.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String choixLargeur= (adapterView.getAdapter().getItem(i).toString());
+                MParametres.instance.setLargeur(Integer.parseInt(choixLargeur));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        Spinner spinnerPourGagner = this.findViewById(R.id.pourGagnerNombre);
+        spinnerPourGagner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String choixPourGagner = (adapterView.getAdapter().getItem(i).toString());
+                MParametres.instance.setPourGagner(Integer.parseInt(choixPourGagner));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        if(savedInstanceState != null){
+            restaurerParametres(savedInstanceState);
+        }
+
     }
     private void restaurerParametres(Bundle savedInstanceState){
 
+            Map<String,Object> objetJson = MParametres.instance.enObjetJson();
+            String json = Jsonification.enChaine(objetJson);
+        MParametres.instance.aPartirObjetJson(objetJson);
+        Log.d("atelier 5:", AActivity.class.getSimpleName()+"::restaurerParametres, clé:"+ MParametres.instance.getClass().getSimpleName());
+        Log.d("atelier 5:", AActivity.class.getSimpleName()+"::restaurerParametres, json:"+json);
+
     }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -77,11 +110,17 @@ public class AActivity extends Activite{
 
 
     }
+
     private void sauvegarderParametres(Bundle outState){
-        MParametres monModele = new MParametres();
-        Map<String,Object> objetJson = monModele.enObjetJson();
+
+        Map<String,Object> objetJson = MParametres.instance.enObjetJson();
         String json = Jsonification.enChaine(objetJson);
-        outState.putInt(this.getClass().getSimpleName(), Integer.parseInt(json));
+        outState.putString(this.getClass().getSimpleName(), json);
+
+        Log.d("atelier 5:", AActivity.class.getSimpleName()+"::sauvegarderParametres, clé:"+ MParametres.instance.getClass().getSimpleName());
+        Log.d("atelier 5:", AActivity.class.getSimpleName()+"::sauvegarderParametres, json:"+json);
     }
+
+
 
 }

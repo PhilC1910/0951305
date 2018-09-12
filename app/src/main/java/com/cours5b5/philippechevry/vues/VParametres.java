@@ -13,6 +13,8 @@ import com.cours5b5.philippechevry.activites.AMenuPrincipal;
 import com.cours5b5.philippechevry.global.gConstantes;
 import com.cours5b5.philippechevry.modeles.MParametres;
 
+import java.util.Collection;
+
 public class VParametres extends Vue {
 
     static {
@@ -35,15 +37,27 @@ public class VParametres extends Vue {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        try {
-            MParametres.class.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
 
-        
+
+        MParametres monModele = MParametres.instance;
+
+        Spinner spinnerHauteur = this.findViewById(R.id.hauteurNombre);
+        ArrayAdapter<Integer> adapterHauteur = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
+        adapterHauteur.addAll( monModele.getChoixHauteur());
+        spinnerHauteur.setAdapter(adapterHauteur);
+        spinnerHauteur.setSelection(adapterHauteur.getPosition(gConstantes.hauteurDefault));
+
+        Spinner spinnerLargeur = this.findViewById(R.id.largeurNombre);
+        ArrayAdapter<Integer> adapterLargeur = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
+       adapterLargeur.addAll( monModele.getChoixLargeur());
+        spinnerLargeur.setAdapter(adapterLargeur);
+        spinnerLargeur.setSelection(adapterLargeur.getPosition(gConstantes.largeurDefault));
+        Spinner spinnerPourGagner = this.findViewById(R.id.pourGagnerNombre);
+        ArrayAdapter<Integer> adapterPourGagner = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
+        adapterPourGagner.addAll( monModele.getChoixPourGagner());
+        spinnerPourGagner.setAdapter(adapterPourGagner);
+        spinnerPourGagner.setSelection(adapterPourGagner.getPosition(gConstantes.pourGagnerDefault));
+
 
     }
 
