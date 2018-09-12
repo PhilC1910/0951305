@@ -32,12 +32,12 @@ public class AActivity extends Activite{
 
         Spinner spinnerHauteur = this.findViewById(R.id.hauteurNombre);
         spinnerHauteur.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String choixHauteur = (adapterView.getAdapter().getItem(i).toString());
                 MParametres.instance.setHauteur(Integer.parseInt(choixHauteur));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -45,12 +45,12 @@ public class AActivity extends Activite{
 
         Spinner spinnerLargeur = this.findViewById(R.id.largeurNombre);
         spinnerLargeur.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String choixLargeur= (adapterView.getAdapter().getItem(i).toString());
                 MParametres.instance.setLargeur(Integer.parseInt(choixLargeur));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -58,13 +58,14 @@ public class AActivity extends Activite{
         });
 
         Spinner spinnerPourGagner = this.findViewById(R.id.pourGagnerNombre);
+
         spinnerPourGagner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String choixPourGagner = (adapterView.getAdapter().getItem(i).toString());
                 MParametres.instance.setPourGagner(Integer.parseInt(choixPourGagner));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -81,6 +82,7 @@ public class AActivity extends Activite{
             Map<String,Object> objetJson = MParametres.instance.enObjetJson();
             String json = Jsonification.enChaine(objetJson);
         MParametres.instance.aPartirObjetJson(objetJson);
+
         Log.d("atelier 5:", AActivity.class.getSimpleName()+"::restaurerParametres, clé:"+ MParametres.instance.getClass().getSimpleName());
         Log.d("atelier 5:", AActivity.class.getSimpleName()+"::restaurerParametres, json:"+json);
 
@@ -113,11 +115,13 @@ public class AActivity extends Activite{
 
     private void sauvegarderParametres(Bundle outState){
 
+
         Map<String,Object> objetJson = MParametres.instance.enObjetJson();
         String json = Jsonification.enChaine(objetJson);
         outState.putString(this.getClass().getSimpleName(), json);
 
         Log.d("atelier 5:", AActivity.class.getSimpleName()+"::sauvegarderParametres, clé:"+ MParametres.instance.getClass().getSimpleName());
+
         Log.d("atelier 5:", AActivity.class.getSimpleName()+"::sauvegarderParametres, json:"+json);
     }
 

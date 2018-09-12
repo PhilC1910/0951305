@@ -110,8 +110,11 @@ public class MParametres extends Modele {
             if (cle.equals( _hauteur)){
              hauteur = Integer.valueOf((String) entry.getValue());
             }else if(cle.equals( _largeur)){
+
                 largeur = Integer.valueOf((String) entry.getValue());
+
             }else{
+
                 pourGagner = Integer.valueOf((String) entry.getValue());
             }
         }
@@ -124,6 +127,7 @@ public class MParametres extends Modele {
         objetJson.put(_hauteur,hauteur.toString());
         objetJson.put(_largeur,largeur.toString());
         objetJson.put(_pourGagner, pourGagner.toString());
+
         return  objetJson;
     }
 }
