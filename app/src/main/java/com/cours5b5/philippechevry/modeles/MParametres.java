@@ -94,6 +94,7 @@ public class MParametres extends Modele {
             list.add(indice);
         }
         return list;
+
     }
 
 
