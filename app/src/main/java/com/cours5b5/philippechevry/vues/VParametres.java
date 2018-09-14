@@ -48,21 +48,21 @@ public class VParametres extends Vue {
 
         spinnerHauteur.setAdapter(adapterHauteur);
 
-        spinnerHauteur.setSelection(adapterHauteur.getPosition(gConstantes.hauteurDefault));
+        spinnerHauteur.setSelection(adapterHauteur.getPosition(MParametres.instance.getHauteur()));
 
         Spinner spinnerLargeur = this.findViewById(R.id.largeurNombre);
         ArrayAdapter<Integer> adapterLargeur = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
        adapterLargeur.addAll( monModele.getChoixLargeur());
 
         spinnerLargeur.setAdapter(adapterLargeur);
-        spinnerLargeur.setSelection(adapterLargeur.getPosition(gConstantes.largeurDefault));
+        spinnerLargeur.setSelection(adapterLargeur.getPosition(MParametres.instance.getLargeur()));
 
         Spinner spinnerPourGagner = this.findViewById(R.id.pourGagnerNombre);
         ArrayAdapter<Integer> adapterPourGagner = new ArrayAdapter<>(this.getContext(),R.layout.support_simple_spinner_dropdown_item);
         adapterPourGagner.addAll( monModele.getChoixPourGagner());
 
         spinnerPourGagner.setAdapter(adapterPourGagner);
-        spinnerPourGagner.setSelection(adapterPourGagner.getPosition(gConstantes.pourGagnerDefault));
+        spinnerPourGagner.setSelection(adapterPourGagner.getPosition(MParametres.instance.getPourGagner()));
 
 
     }

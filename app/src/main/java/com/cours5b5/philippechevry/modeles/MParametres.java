@@ -35,9 +35,10 @@ public class MParametres extends Modele {
     private List<Integer> choixPourGagner;
 
     public MParametres(){
-        genererListeChoixPourGagner();
-        genererListeChoixLargeur();
-        genererListeChoixHauteur();
+
+
+      genererListeDeChoix();
+
     }
 
     public List<Integer> getChoixHauteur() {
@@ -77,10 +78,14 @@ public class MParametres extends Modele {
 
     public void genererListeDeChoix(){
 
-
         genererListeChoixHauteur();
         genererListeChoixLargeur();
         genererListeChoixPourGagner();
+
+        setHauteur(gConstantes.hauteurDefault);
+        setLargeur(gConstantes.largeurDefault);
+        setPourGagner(gConstantes.pourGagnerDefault);
+
     }
 
     private List<Integer> genererListeDeChoix(int min, int max){

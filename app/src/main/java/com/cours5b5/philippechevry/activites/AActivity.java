@@ -45,7 +45,7 @@ public class AActivity extends Activite{
 
         Spinner spinnerLargeur = this.findViewById(R.id.largeurNombre);
         spinnerLargeur.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String choixLargeur= (adapterView.getAdapter().getItem(i).toString());
