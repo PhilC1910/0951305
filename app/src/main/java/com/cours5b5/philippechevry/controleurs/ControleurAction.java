@@ -1,7 +1,6 @@
 package com.cours5b5.philippechevry.controleurs;
 
 import com.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
-import com.cours5b5.philippechevry.controleurs.interfaces.ListenerFournisseur;
 import com.cours5b5.philippechevry.global.GCommande;
 
 import java.util.List;

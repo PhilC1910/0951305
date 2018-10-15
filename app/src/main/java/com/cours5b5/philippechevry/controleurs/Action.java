@@ -1,7 +1,6 @@
 package com.cours5b5.philippechevry.controleurs;
 
 import com.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
-import com.cours5b5.philippechevry.controleurs.interfaces.ListenerFournisseur;
 
 public class Action {
     Fournisseur fournisseur;
@@ -15,7 +14,7 @@ public class Action {
     public void executerDesQuePossible(){
 
         ControleurAction controleurAction = new ControleurAction();
-            
+
     }
 
     public Action cloner(){

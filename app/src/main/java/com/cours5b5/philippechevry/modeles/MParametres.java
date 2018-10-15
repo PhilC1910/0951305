@@ -30,6 +30,11 @@ public class MParametres extends Modele {
     public Integer pourGagner;
     private final String _pourGagner = "pourGagner";
 
+    @AttributSerialisable
+    public MParametresPartie parametresPartie;
+    private String _paramestresPartie = "parametresPartie";
+
+
     private List<Integer> choixHauteur;
     private List<Integer> choixLargeur;
     private List<Integer> choixPourGagner;
@@ -107,6 +112,9 @@ public class MParametres extends Modele {
     public void genererListeChoixPourGagner(){
         choixPourGagner = genererListeDeChoix(gConstantes.pourGagnerMin,gConstantes.pourGagnerMax);
     }
+
+    public MParametresPartie getParametresPartie(){return parametresPartie;
+      }
     @Override
     public void aPartirObjetJson(Map<String, Object> objetJson) {
         for(Map.Entry<String,Object> entry :objetJson.entrySet()){

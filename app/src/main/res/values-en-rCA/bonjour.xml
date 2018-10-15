@@ -11,4 +11,6 @@
     <string name="pourGagner"> to win</string>
 
     <string name="parametre"> parameter</string>
+
+    <string name="jouer"> play </string>
 </resources>
