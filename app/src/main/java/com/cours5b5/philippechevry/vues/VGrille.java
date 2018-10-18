@@ -67,13 +67,13 @@ public class VGrille extends GridLayout {
 
     private void ajouterCases(int hauteur, int largeur){
         nombreRangees = largeur;
-        for (int rangerLigne =0; rangerLigne < largeur; rangerLigne++ ) {
-            for (int colonne = hauteur; colonne > 0; colonne--){
+        for (int  colonne =0; colonne < largeur; colonne++ ) {
+            for (int rangerLigne = hauteur; rangerLigne > 0; rangerLigne--){
 
-                VCase vCase = new VCase(getContext(),rangerLigne,colonne);
+                VCase vCase = new VCase(getContext(),rangerLigne - (2*(rangerLigne - hauteur) - hauteur),colonne);
 
-                this.addView(vCase,getMiseEnPageCase(colonne,rangerLigne));
-                lesCases[rangerLigne][colonne] = vCase;
+                this.addView(vCase,getMiseEnPageCase(rangerLigne ,colonne));
+                lesCases[colonne][ rangerLigne] = vCase;
         }
         }
 
