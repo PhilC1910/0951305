@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cours5b5.philippechevry.vues.VPartie
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewJoueur1"
+        android:layout_width="103dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="286dp"
+        android:layout_marginTop="235dp"
+        android:text="@string/joueur1"
+        app:layout_constraintBottom_toTopOf="@+id/textViewJoueur2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewJoueur2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="230dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/joueur2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewJoueur1" />
+
+    <com.cours5b5.philippechevry.vues.VGrille
+        android:id="@+id/GridLayoutGrille"
+        android:layout_width="250dp"
+        android:layout_height="495dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewJoueur2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.cours5b5.philippechevry.vues.VGrille>
+</com.cours5b5.philippechevry.vues.VPartie>
