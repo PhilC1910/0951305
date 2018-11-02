@@ -19,6 +19,9 @@ public class VMenuPrincipal extends Vue {
     private Button boutonPartie;
     private Action actionPartie;
 
+    private Button boutonConnexionFireBase;
+    private Action actionConnexionFireBase;
+
     public VMenuPrincipal(Context context) {
         super(context);
     }
@@ -49,7 +52,7 @@ public class VMenuPrincipal extends Vue {
         boutonParametres = findViewById(R.id.bouton_parametres);
 
         boutonPartie = findViewById(R.id.bouton_partie);
-
+        boutonConnexionFireBase = findViewById(R.id.buttonConnexion);
     }
 
     private void demanderActions() {
@@ -57,6 +60,7 @@ public class VMenuPrincipal extends Vue {
         actionParametres = ControleurAction.demanderAction(GCommande.OUVRIR_MENU_PARAMETRES);
 
         actionPartie = ControleurAction.demanderAction(GCommande.DEMARRER_PARTIE);
+        actionConnexionFireBase = ControleurAction.demanderAction(GCommande.CONNEXION_FIRE_BASE);
 
     }
 
@@ -66,6 +70,7 @@ public class VMenuPrincipal extends Vue {
         installerListenerParametres();
 
         installerListenerPartie();
+        installerListenerConexion();
 
     }
 
@@ -86,6 +91,17 @@ public class VMenuPrincipal extends Vue {
             @Override
             public void onClick(View view) {
                 actionParametres.executerDesQuePossible();
+            }
+        });
+
+    }
+
+    private void installerListenerConexion() {
+
+        boutonConnexionFireBase.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionConnexionFireBase.executerDesQuePossible();
             }
         });
 
