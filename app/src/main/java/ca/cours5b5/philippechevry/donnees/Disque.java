@@ -80,9 +80,9 @@ public final class Disque extends SourceDeDonnees {
     }
 
 
-    private File getFichier(String nomModele) {
-
-        String nomFichier = getNomFichier(nomModele);
+    private File getFichier(String cheminSauvegarde) {
+        String[] tabElementChemin = cheminSauvegarde.split("/");
+        String nomFichier =  tabElementChemin[0]+ ".json";
 
         return new File(repertoireRacine, nomFichier);
 

@@ -136,4 +136,13 @@ public final class ControleurModeles {
         }
     }
 
+    private static String getCheminSauvegarde(String nomModele){
+        String chemin = nomModele + "/idUsager";
+
+
+        return chemin;
+    }
+
+
+
 }
