@@ -13,6 +13,7 @@ import ca.cours5b5.philippechevry.modeles.MParametresPartie;
 import ca.cours5b5.philippechevry.modeles.MPartie;
 import ca.cours5b5.philippechevry.modeles.Modele;
 import ca.cours5b5.philippechevry.donnees.Disque;
+import ca.cours5b5.philippechevry.usagers.UsagerCourant;
 
 public final class ControleurModeles {
 
@@ -137,7 +138,9 @@ public final class ControleurModeles {
     }
 
     private static String getCheminSauvegarde(String nomModele){
-        String chemin = nomModele + "/idUsager";
+
+
+        String chemin = nomModele + "/" + UsagerCourant.getId();
 
 
         return chemin;
