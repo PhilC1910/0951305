@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ca.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
+import ca.cours5b5.philippechevry.donnees.Serveur;
 import ca.cours5b5.philippechevry.donnees.SourceDeDonnees;
 import ca.cours5b5.philippechevry.exceptions.ErreurModele;
 import ca.cours5b5.philippechevry.modeles.MParametres;
@@ -25,13 +26,14 @@ public final class ControleurModeles {
 
     private static List<SourceDeDonnees> listeDeSauvegardes;
 
+
     static {
 
         modelesEnMemoire = new HashMap<>();
 
         listeDeSauvegardes = new ArrayList<>();
         listeDeSauvegardes.add(Disque.getInstance());
-
+        listeDeSauvegardes.add(Serveur.getInstance());
     }
 
     public static void setSequenceDeChargement(SourceDeDonnees... sequenceDeChargement){
