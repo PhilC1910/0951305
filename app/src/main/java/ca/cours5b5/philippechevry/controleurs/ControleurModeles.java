@@ -157,16 +157,16 @@ public final class ControleurModeles {
     private static void chargerDonnees(Modele modele,String nomModele,ListenerGetModele listenerGetModele){
         String cheminDeSauvegarde = getCheminSauvegarde(nomModele);
         int indiceSourceCourante = 0;
-        Log.d("Atelier12","de");
+
         chargementViaSequence(modele,cheminDeSauvegarde,listenerGetModele,indiceSourceCourante);
     }
 
     private static void chargementViaSequence(Modele modele,String cheminDeSauvegarde,ListenerGetModele listenerGetModele, int indiceSourceCourante){
         if(indiceSourceCourante >= sequenceDeChargement.length){
-            Log.d("Atelier12","dsd");
+
             terminerChargement(modele,listenerGetModele);
         }else{
-            Log.d("Atelier12","dsds");
+
            chargementViaSourceCouranteOuSuivante(modele, cheminDeSauvegarde, listenerGetModele, indiceSourceCourante);
         }
     }
@@ -175,33 +175,33 @@ public final class ControleurModeles {
         sequenceDeChargement[indiceSourceCourante].chargerModele(cheminDeSauvegarde, new ListenerChargement() {
             @Override
             public void reagirSucces(Map<String, Object> objecJson) {
-                Log.d("Atelier12","dsdsds");
+
                 terminerChargementAvecDonnees(objecJson,modele,listenerGetModele);
             }
 
             @Override
             public void reagirErreur(Exception e) {
-                Log.d("Atelier12","dsdsd");
+
                 chargementViaSourceSuivante(modele, cheminDeSauvegarde, listenerGetModele, indiceSourceCourante);
             }
         });
     }
 
     private static void terminerChargementAvecDonnees(Map<String,Object> objetJson, Modele modele, ListenerGetModele listenerGetModele){
-        Log.d("Atelier12","sd");
+
         modele.aPartirObjetJson(objetJson);
         terminerChargement(modele, listenerGetModele);
     }
 
     private static void terminerChargement(Modele modele, ListenerGetModele listenerGetModele){
 
-        Log.d("Atelier12","s");
+
 
         listenerGetModele.reagirAuModele(modele);
     }
 
     private  static void chargementViaSourceSuivante(Modele modele, String cheminDeSauvegarde,ListenerGetModele listenerGetModele,int indiceSourceCourante){
-        Log.d("Atelier12","d");
+
         chargementViaSequence(modele,cheminDeSauvegarde,listenerGetModele,indiceSourceCourante + 1);
     }
     public static void detruireModele(String nomModele) {
