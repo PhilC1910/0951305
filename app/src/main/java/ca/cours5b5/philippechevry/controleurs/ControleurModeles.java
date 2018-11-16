@@ -1,11 +1,14 @@
 package ca.cours5b5.philippechevry.controleurs;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ca.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
+
 import ca.cours5b5.philippechevry.controleurs.interfaces.ListenerGetModele;
 import ca.cours5b5.philippechevry.donnees.ListenerChargement;
 import ca.cours5b5.philippechevry.donnees.Serveur;
@@ -33,6 +36,7 @@ public final class ControleurModeles {
         modelesEnMemoire = new HashMap<>();
 
         listeDeSauvegardes = new ArrayList<>();
+
         listeDeSauvegardes.add(Disque.getInstance());
         listeDeSauvegardes.add(Serveur.getInstance());
     }
@@ -46,26 +50,28 @@ public final class ControleurModeles {
     public static void sauvegarderModeleDansCetteSource(String nomModele, SourceDeDonnees sourceDeDonnees) {
 
         Modele modele = modelesEnMemoire.get(nomModele);
-
+        String cheminDeSauvegarde = getCheminSauvegarde(nomModele);
         if(modele != null){
 
             Map<String, Object> objetJson = modele.enObjetJson();
 
-            sourceDeDonnees.sauvegarderModele(nomModele, objetJson);
+            sourceDeDonnees.sauvegarderModele(cheminDeSauvegarde, objetJson);
 
         }
     }
 
-    static void getModele(final String nomModele,ListenerGetModele listenerGetModele){
+    static void getModele(String nomModele, ListenerGetModele listenerGetModele){
 
         Modele modele = modelesEnMemoire.get(nomModele);
 
         if(modele == null){
 
             creerModeleEtChargerDonnees(nomModele, listenerGetModele);
+        }else{
+            listenerGetModele.reagirAuModele(modele);
         }
 
-       listenerGetModele.reagirAuModele(modele);
+
     }
 
 
@@ -133,9 +139,6 @@ public final class ControleurModeles {
                  listenerGetModele.reagirAuModele(mPartie);
              }
          });
-
-
-
         }else{
 
             throw new ErreurModele("Modèle inconnu: " + nomModele);
@@ -154,39 +157,52 @@ public final class ControleurModeles {
     private static void chargerDonnees(Modele modele,String nomModele,ListenerGetModele listenerGetModele){
         String cheminDeSauvegarde = getCheminSauvegarde(nomModele);
         int indiceSourceCourante = 0;
+        Log.d("Atelier12","de");
         chargementViaSequence(modele,cheminDeSauvegarde,listenerGetModele,indiceSourceCourante);
     }
+
     private static void chargementViaSequence(Modele modele,String cheminDeSauvegarde,ListenerGetModele listenerGetModele, int indiceSourceCourante){
         if(indiceSourceCourante >= sequenceDeChargement.length){
+            Log.d("Atelier12","dsd");
             terminerChargement(modele,listenerGetModele);
         }else{
-            chargementViaSourceSuivante(modele,cheminDeSauvegarde,listenerGetModele,indiceSourceCourante);
+            Log.d("Atelier12","dsds");
+           chargementViaSourceCouranteOuSuivante(modele, cheminDeSauvegarde, listenerGetModele, indiceSourceCourante);
         }
     }
+
     private static void chargementViaSourceCouranteOuSuivante(final Modele modele, final String cheminDeSauvegarde, final ListenerGetModele listenerGetModele,final int indiceSourceCourante){
         sequenceDeChargement[indiceSourceCourante].chargerModele(cheminDeSauvegarde, new ListenerChargement() {
             @Override
             public void reagirSucces(Map<String, Object> objecJson) {
+                Log.d("Atelier12","dsdsds");
                 terminerChargementAvecDonnees(objecJson,modele,listenerGetModele);
             }
 
             @Override
             public void reagirErreur(Exception e) {
+                Log.d("Atelier12","dsdsd");
                 chargementViaSourceSuivante(modele, cheminDeSauvegarde, listenerGetModele, indiceSourceCourante);
             }
         });
     }
 
     private static void terminerChargementAvecDonnees(Map<String,Object> objetJson, Modele modele, ListenerGetModele listenerGetModele){
+        Log.d("Atelier12","sd");
+        modele.aPartirObjetJson(objetJson);
         terminerChargement(modele, listenerGetModele);
     }
 
     private static void terminerChargement(Modele modele, ListenerGetModele listenerGetModele){
+
+        Log.d("Atelier12","s");
+
         listenerGetModele.reagirAuModele(modele);
     }
 
     private  static void chargementViaSourceSuivante(Modele modele, String cheminDeSauvegarde,ListenerGetModele listenerGetModele,int indiceSourceCourante){
-        chargementViaSequence(modele,cheminDeSauvegarde,listenerGetModele,indiceSourceCourante);
+        Log.d("Atelier12","d");
+        chargementViaSequence(modele,cheminDeSauvegarde,listenerGetModele,indiceSourceCourante + 1);
     }
     public static void detruireModele(String nomModele) {
 
