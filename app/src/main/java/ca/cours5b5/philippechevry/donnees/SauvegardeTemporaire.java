@@ -5,6 +5,7 @@ import android.os.Bundle;
 import java.util.Map;
 
 
+import ca.cours5b5.philippechevry.exceptions.ErreurSerialisation;
 import ca.cours5b5.philippechevry.serialisation.Jsonification;
 
 public class SauvegardeTemporaire extends SourceDeDonnees {
@@ -16,7 +17,7 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
     }
 
     @Override
-    public Map<String, Object> chargerModele(String cheminSauvegarde) {
+    public void chargerModele(String cheminSauvegarde,ListenerChargement listenerChargement) {
 
         if(bundle != null && bundle.containsKey(this.getCle(cheminSauvegarde))){
 
@@ -24,11 +25,11 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
 
             Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
 
-            return objetJson;
+            listenerChargement.reagirSucces(objetJson);
 
         }else{
 
-            return null;
+            listenerChargement.reagirErreur(new ErreurSerialisation("erreur de chargemwt dans la sauvegarde temporaire"));
 
         }
     }
@@ -42,6 +43,8 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
 
         }
     }
+
+
 
     private String getCle(String cheminSauvegarde){
         String[] tabElementChemin =  cheminSauvegarde.split("/");
