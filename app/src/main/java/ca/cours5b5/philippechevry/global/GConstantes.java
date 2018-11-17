@@ -19,4 +19,7 @@ public final class GConstantes {
     public static final String FIXME_JSON_PARTIE_RESEAU = "{\"listeCoups\":[],\"parametres\":{\"largeur\":\"7\",\"pourGagner\":\"4\",\"hauteur\":\"6\"},\"idJoueurInvite\":\"Du5ORtg1N0baUpC8nn5t7l2GucA2\",\"idJoueurHote\":\"bxIfyak79LMxLgNmhd985sf2izr1\"}";
     public static final int LIMITE_MAX = 10;
 
+    public static final String CLE_COUPS_JOUEUR_HOTE = "coupsJoueurHote";
+    public static final String CLE_COUPS_JOUEUR_INVITE = "coupsJoueurInvite";
+
 }
