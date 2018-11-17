@@ -1,6 +1,7 @@
 package ca.cours5b5.philippechevry.controleurs;
 
 import ca.cours5b5.philippechevry.controleurs.interfaces.ListenerGetModele;
+import ca.cours5b5.philippechevry.donnees.Serveur;
 import ca.cours5b5.philippechevry.global.GCommande;
 import ca.cours5b5.philippechevry.global.GConstantes;
 import ca.cours5b5.philippechevry.modeles.MPartieReseau;
@@ -67,8 +68,10 @@ public class ControleurPartieReseau {
         proxyEmettreCoups.ajouterValeur(idColonne);
     }
 
-    public void detruireSauvegrdeServeur(){
+    public void detruireSauvegardeServeur(){
 
+
+       // Serveur.getInstance().detruireSauvegarde();
     }
 }
 

@@ -3,6 +3,7 @@ package ca.cours5b5.philippechevry.modeles;
 import java.util.Map;
 
 import ca.cours5b5.philippechevry.controleurs.ControleurAction;
+import ca.cours5b5.philippechevry.controleurs.ControleurPartieReseau;
 import ca.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.philippechevry.controleurs.interfaces.ListenerFournisseur;
 import ca.cours5b5.philippechevry.exceptions.ErreurAction;
@@ -38,6 +39,7 @@ private String _idJoueurHote;
                 try {
                     int colonne = Integer.parseInt((String)args[0]);
 
+
                     recevoirCoupReseau( colonne);
                 }catch (ClassCastException e){
                     throw new ErreurAction(e);
@@ -51,6 +53,21 @@ private String _idJoueurHote;
     @Override
     protected void fournirActionPlacerJeton() {
         super.fournirActionPlacerJeton();
+
+        ControleurAction.fournirAction(this, GCommande.JOUER_COUP_ICI, new ListenerFournisseur() {
+            @Override
+            public void executer(Object... args) {
+                try {
+                    int colonne = Integer.parseInt((String)args[0]);
+
+
+                    jouerCoup(colonne);
+                    ControleurPartieReseau.getInstance().transmettreCoup(colonne);
+                }catch (ClassCastException e){
+                    throw new ErreurAction(e);
+                }
+            }
+        });
     }
 
     private void recevoirCoupReseau(int colonne){
