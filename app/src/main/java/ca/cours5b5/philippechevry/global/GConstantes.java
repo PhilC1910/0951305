@@ -16,5 +16,5 @@ public final class GConstantes {
     public static final int POUR_GAGNER_PAR_DEFAUT = 4;
 
     public static final String EXTENSION_PAR_DEFAUT=".json";
-
+    public static final String FIXME_JSON_PARTIE_RESEAU = "{\"listeCoups\":[],\"parametres\":{\"largeur\":\"7\",\"pourGagner\":\"4\",\"hauteur\":\"6\"},\"idJoueurInvite\":\"Du5ORtg1N0baUpC8nn5t7l2GucA2\",\"idJoueurHote\":\"bxIfyak79LMxLgNmhd985sf2izr1\"}";
 }

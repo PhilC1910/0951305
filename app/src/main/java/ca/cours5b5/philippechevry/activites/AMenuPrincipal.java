@@ -14,12 +14,13 @@ import ca.cours5b5.philippechevry.controleurs.ControleurAction;
 import ca.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.philippechevry.controleurs.interfaces.ListenerFournisseur;
 import ca.cours5b5.philippechevry.global.GCommande;
+import ca.cours5b5.philippechevry.global.GConstantes;
 
 public class AMenuPrincipal extends Activite implements Fournisseur {
        private static int MA_CONSTANTE_CODE_CONNEXION = 123;
 
     private static List<AuthUI.IdpConfig> fournisseursDeConnexion = new ArrayList<>();
-    public static final String FIXME_JSON_PARTIE_RESEAU = "{\"listeCoups\":[],\"parametres\":{\"largeur\":\"7\",\"pourGagner\":\"4\",\"hauteur\":\"6\"},\"idJoueurInvite\":\"PHMRKe3q7zOhfQQOwemjtfBFNp12\",\"idJoueurHote\":\"T1m8GxiBAlhLUcF6Ne0GV06nnEg1\"}";
+
     static{
 
         fournisseursDeConnexion.add(new AuthUI.IdpConfig.GoogleBuilder().build());
@@ -117,7 +118,7 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
     }
     private void transitionPartieReseau(){
         Intent intent = new Intent(this,APartieReseau.class);
-            intent.putExtra(APartieReseau.class.getSimpleName(),FIXME_JSON_PARTIE_RESEAU);
+            intent.putExtra(APartieReseau.class.getSimpleName(),GConstantes.FIXME_JSON_PARTIE_RESEAU);
             startActivity(intent);
     }
 
