@@ -14,6 +14,7 @@ import ca.cours5b5.philippechevry.donnees.ListenerChargement;
 import ca.cours5b5.philippechevry.donnees.Serveur;
 import ca.cours5b5.philippechevry.donnees.SourceDeDonnees;
 import ca.cours5b5.philippechevry.exceptions.ErreurModele;
+import ca.cours5b5.philippechevry.modeles.Identifiable;
 import ca.cours5b5.philippechevry.modeles.MParametres;
 import ca.cours5b5.philippechevry.modeles.MPartie;
 import ca.cours5b5.philippechevry.modeles.Modele;
@@ -222,11 +223,14 @@ public final class ControleurModeles {
         }
     }
 
-    private static String getCheminSauvegarde(String nomModele){
-
-
-        String chemin = nomModele + "/" + UsagerCourant.getId();
-
+     static String getCheminSauvegarde(String nomModele){
+        String chemin = "";
+     Modele modele= modelesEnMemoire.get(nomModele);
+            if(modele != null && modele instanceof Identifiable ){
+               chemin = nomModele + "/" + ((Identifiable) modele).getId();
+            }else{
+                chemin = nomModele + "/" + UsagerCourant.getId();
+            }
 
         return chemin;
     }

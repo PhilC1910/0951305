@@ -7,6 +7,7 @@ import ca.cours5b5.philippechevry.controleurs.ControleurModeles;
 import ca.cours5b5.philippechevry.donnees.Disque;
 import ca.cours5b5.philippechevry.donnees.SauvegardeTemporaire;
 import ca.cours5b5.philippechevry.donnees.Serveur;
+import ca.cours5b5.philippechevry.donnees.Transition;
 import ca.cours5b5.philippechevry.modeles.MParametres;
 
 
@@ -25,6 +26,7 @@ public abstract class Activite extends AppCompatActivity {
 
         ControleurModeles.setSequenceDeChargement(
                 new SauvegardeTemporaire(savedInstanceState),
+                new Transition(getIntent().getExtras()),
                 Serveur.getInstance(),
                 Disque.getInstance());
 
