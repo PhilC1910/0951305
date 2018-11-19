@@ -15,6 +15,7 @@ import ca.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.philippechevry.controleurs.interfaces.ListenerFournisseur;
 import ca.cours5b5.philippechevry.global.GCommande;
 import ca.cours5b5.philippechevry.global.GConstantes;
+import ca.cours5b5.philippechevry.modeles.MPartieReseau;
 
 public class AMenuPrincipal extends Activite implements Fournisseur {
        private static int MA_CONSTANTE_CODE_CONNEXION = 123;
@@ -43,6 +44,7 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
 
         fournirActionDemarrerPartie();
         fournirActionConnextionFireBase();
+        fournirActionJoindreOuCreerPartieReseau();
     }
 
     private void fournirActionOuvrirMenuParametres() {
@@ -118,7 +120,7 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
     }
     private void transitionPartieReseau(){
         Intent intent = new Intent(this,APartieReseau.class);
-            intent.putExtra(APartieReseau.class.getSimpleName(),GConstantes.FIXME_JSON_PARTIE_RESEAU);
+            intent.putExtra(MPartieReseau.class.getSimpleName(),GConstantes.FIXME_JSON_PARTIE_RESEAU);
             startActivity(intent);
     }
 

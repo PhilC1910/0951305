@@ -15,15 +15,18 @@ public class MPartieReseau extends MPartie implements Fournisseur, Identifiable 
 
 @AttributSerialisable
 public String idJoueurInvite;
-private String _idJoueurInvite;
+private String _idJoueurInvite = "idJoueurInvite";
 
 @AttributSerialisable
 public String idJoueurHote;
-private String _idJoueurHote;
+private String _idJoueurHote= "idJoueurHote";
 
 
     public MPartieReseau(MParametresPartie parametres) {
+
         super(parametres);
+        fournirActionRecevoirCoup();
+
     }
 
     @Override
@@ -58,8 +61,8 @@ private String _idJoueurHote;
             @Override
             public void executer(Object... args) {
                 try {
-                    int colonne = Integer.parseInt((String)args[0]);
 
+                    int colonne = (Integer) args[0];
 
                     jouerCoup(colonne);
                     ControleurPartieReseau.getInstance().transmettreCoup(colonne);

@@ -31,19 +31,22 @@ public class ControleurPartieReseau {
     private void connecterAuServer(String idJoueurHote){
       String cheminCoupsJoeurHote = getCheminCoupsJoueurHote(idJoueurHote);
       String cheminCoupsJoeurInvite = getCheminCoupsJoueurInvite(idJoueurHote);
-        if (UsagerCourant.getId().equals(idJoueurHote)){
+
+      if (UsagerCourant.getId().equals(idJoueurHote)){
             connecterEnTantQueJoueurHote(cheminCoupsJoeurHote,cheminCoupsJoeurInvite);
             }else{
             connecterEnTantQueJoueurInvite(cheminCoupsJoeurHote,cheminCoupsJoeurInvite);
             }
+
         proxyRecevoirCoups.setActionNouvelItem(GCommande.RECEVOIR_COUP_RESEAU);
+        proxyRecevoirCoups.connecterAuserveur();
         proxyEmettreCoups.connecterAuserveur();
-        proxyRecevoirCoups.connecterAuserveur();;
     }
 
     private void connecterEnTantQueJoueurHote(String cheminCoupsJoueurHote, String cheminCoupsJoueurInvite){
         proxyEmettreCoups = new ProxyListe(cheminCoupsJoueurHote);
         proxyRecevoirCoups = new ProxyListe(cheminCoupsJoueurInvite);
+
     }
 
     private void connecterEnTantQueJoueurInvite(String cheminCoupsJoueurHote, String cheminCoupsJoueurInvite){

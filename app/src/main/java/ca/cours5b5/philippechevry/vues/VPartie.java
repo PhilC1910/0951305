@@ -73,9 +73,11 @@ public class VPartie extends Vue {
 
     private void preparerAffichage(MPartie partie) {
 
-        MParametresPartie parametresPartie = partie.getParametres();
+        MParametresPartie parametresPartie =  partie.getParametres();
 
-        grille.creerGrille(parametresPartie.getHauteur(), parametresPartie.getLargeur());
+        Log.d("test", "preparerAffichage: " + grille);
+
+        grille.creerGrille(parametresPartie.getLargeur(), parametresPartie.getHauteur());
 
     }
 

@@ -17,6 +17,7 @@ import ca.cours5b5.philippechevry.exceptions.ErreurModele;
 import ca.cours5b5.philippechevry.modeles.Identifiable;
 import ca.cours5b5.philippechevry.modeles.MParametres;
 import ca.cours5b5.philippechevry.modeles.MPartie;
+import ca.cours5b5.philippechevry.modeles.MPartieReseau;
 import ca.cours5b5.philippechevry.modeles.Modele;
 import ca.cours5b5.philippechevry.donnees.Disque;
 import ca.cours5b5.philippechevry.usagers.UsagerCourant;
@@ -140,7 +141,23 @@ public final class ControleurModeles {
                  listenerGetModele.reagirAuModele(mPartie);
              }
          });
-        }else{
+        }else if(nomModele.equals(MPartieReseau.class.getSimpleName())){
+
+            getModele(MParametres.class.getSimpleName(), new ListenerGetModele() {
+                @Override
+                public void reagirAuModele(Modele modele) {
+
+                    MParametres modeleParametre = (MParametres) modele;
+
+                    MPartieReseau modelePartieReseau = new MPartieReseau(modeleParametre.parametresPartie.cloner());
+
+                    listenerGetModele.reagirAuModele(modelePartieReseau);
+
+                }
+
+            });
+
+        } else{
 
             throw new ErreurModele("Modèle inconnu: " + nomModele);
 

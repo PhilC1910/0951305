@@ -1,5 +1,7 @@
 package ca.cours5b5.philippechevry.proxy;
 
+import android.util.Log;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,8 +53,12 @@ public class ProxyListe  extends Proxy implements Fournisseur {
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                actionNouvelItem.setArguments(dataSnapshot.getValue().toString());
-                actionNouvelItem.executerDesQuePossible();
+                if(actionNouvelItem!=null) {
+                    actionNouvelItem.setArguments(dataSnapshot.getValue().toString());
+                    actionNouvelItem.executerDesQuePossible();
+                    Log.d("test", "onChildAdded: " + actionNouvelItem);
+
+                }
             }
 
             @Override
@@ -77,7 +83,7 @@ public class ProxyListe  extends Proxy implements Fournisseur {
         };
     }
     protected Query getRequete(){
-        return  requete = noeudServeur.orderByValue().limitToLast(GConstantes.LIMITE_MAX);
+        return  requete = noeudServeur.orderByKey().limitToFirst(GConstantes.LIMITE_MAX);
 
     }
 

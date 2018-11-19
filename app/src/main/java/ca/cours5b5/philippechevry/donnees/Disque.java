@@ -56,6 +56,11 @@ public final class Disque extends SourceDeDonnees {
     }
 
     @Override
+    public void detruireSauvegarde(String cheminSauvegarde) {
+
+    }
+
+    @Override
     public void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson) {
 
         File fichier = getFichier(cheminSauvegarde);

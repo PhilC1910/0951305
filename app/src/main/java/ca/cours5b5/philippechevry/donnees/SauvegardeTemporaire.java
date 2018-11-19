@@ -35,6 +35,11 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
     }
 
     @Override
+    public void detruireSauvegarde(String cheminSauvegarde) {
+
+    }
+
+    @Override
     public void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson) {
         if(bundle != null){
 
@@ -47,9 +52,7 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
 
 
     private String getCle(String cheminSauvegarde){
-        String[] tabElementChemin =  cheminSauvegarde.split("/");
-        String cle = tabElementChemin[0];
-        return cle;
+        return getNomModele(cheminSauvegarde);
     }
 
 }
