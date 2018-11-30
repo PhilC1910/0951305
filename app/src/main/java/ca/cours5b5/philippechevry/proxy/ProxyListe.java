@@ -1,5 +1,6 @@
 package ca.cours5b5.philippechevry.proxy;
 
+
 import android.util.Log;
 
 import com.google.firebase.database.ChildEventListener;
@@ -17,48 +18,80 @@ import ca.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.philippechevry.global.GCommande;
 import ca.cours5b5.philippechevry.global.GConstantes;
 
-public class ProxyListe  extends Proxy implements Fournisseur {
+public class ProxyListe extends Proxy implements Fournisseur {
+
     private ChildEventListener childEventListener;
+
     private Query requete;
+
     private Action actionNouvelItem;
-    private List<DatabaseReference> noedsAjoutes;
+    private Action actionItemDetruit;
 
-
+    private List<DatabaseReference> noeudsAjoutes;
 
     public ProxyListe(String cheminServeur) {
         super(cheminServeur);
-        noedsAjoutes = new ArrayList<>();
+
+        noeudsAjoutes = new ArrayList<>();
 
     }
-
 
 
     public void setActionNouvelItem(GCommande commande){
-        actionNouvelItem = ControleurAction.demanderAction(commande);
-    }
-    public  void ajouterValeur(Object Valeur){
-        DatabaseReference temporaire = super.noeudServeur.push();
-        temporaire.setValue(Valeur);
-        noedsAjoutes.add(temporaire);
+
+        this.actionNouvelItem = ControleurAction.demanderAction(commande);
+
     }
 
-    @Override
-    public void connecterAuserveur() {
-        super.connecterAuserveur();
-        creerListener();
-        requete = getRequete();
-        requete.addChildEventListener(childEventListener);
+
+    public void setActionItemDetruit(GCommande commande){
+
+        this.actionItemDetruit = ControleurAction.demanderAction(commande);
+
     }
+
+
+    public void ajouterValeur(Object valeur) {
+
+        DatabaseReference noeudAjoute = noeudServeur.push();
+
+        noeudAjoute.setValue(valeur);
+
+        noeudsAjoutes.add(noeudAjoute);
+
+    }
+
+
+    @Override
+    public void connecterAuServeur(){
+        super.connecterAuServeur();
+
+        creerListener();
+
+        requete = getRequete();
+
+        requete.addChildEventListener(childEventListener);
+
+    }
+
+
     private void creerListener(){
+
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if(actionNouvelItem!=null) {
-                    actionNouvelItem.setArguments(dataSnapshot.getValue().toString());
+
+                Object valeur = dataSnapshot.getValue();
+
+                if(actionNouvelItem != null){
+
+                    actionNouvelItem.setArguments(valeur);
+
                     actionNouvelItem.executerDesQuePossible();
-                    Log.d("test", "onChildAdded: " + actionNouvelItem);
 
                 }
+
+
             }
 
             @Override
@@ -68,6 +101,16 @@ public class ProxyListe  extends Proxy implements Fournisseur {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                Object valeur = dataSnapshot.getValue();
+
+                if(actionItemDetruit != null){
+
+                    actionItemDetruit.setArguments(valeur);
+
+                    actionItemDetruit.executerDesQuePossible();
+
+                }
 
             }
 
@@ -82,22 +125,34 @@ public class ProxyListe  extends Proxy implements Fournisseur {
             }
         };
     }
+
+
     protected Query getRequete(){
-        return  requete = noeudServeur.orderByKey().limitToFirst(GConstantes.LIMITE_MAX);
+
+        return noeudServeur.orderByKey().limitToFirst(GConstantes.NOMBRE_DE_VALEURS_A_CHARGER_DU_SERVEUR_PAR_DEFAUT);
 
     }
+
 
     @Override
     public void deconnecterDuServeur() {
+
+        noeudServeur.removeEventListener(childEventListener);
+
+        noeudsAjoutes.clear();
+
         super.deconnecterDuServeur();
-        requete.removeEventListener(childEventListener);
+
     }
+
 
     @Override
     public void detruireValeurs() {
-        for (DatabaseReference neaudDataReference: noedsAjoutes){
-                neaudDataReference.removeValue();
-        }
 
+        for(DatabaseReference noeud : noeudsAjoutes){
+            noeud.removeValue();
+        }
     }
+
+
 }

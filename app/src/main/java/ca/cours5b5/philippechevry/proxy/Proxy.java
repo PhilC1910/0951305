@@ -3,22 +3,31 @@ package ca.cours5b5.philippechevry.proxy;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public  abstract  class Proxy {
+public abstract class Proxy {
 
     private String cheminServeur;
+
     protected DatabaseReference noeudServeur;
-    public  Proxy(String cheminServeur){
+
+    public Proxy(String cheminServeur){
         this.cheminServeur = cheminServeur;
     }
 
-    public void connecterAuserveur(){
+    public void connecterAuServeur(){
+
         noeudServeur = FirebaseDatabase.getInstance().getReference(cheminServeur);
+
     }
 
     public void deconnecterDuServeur(){
         noeudServeur = null;
-        detruireValeurs();
     }
 
-    public  abstract  void detruireValeurs();
+    protected boolean siConnecte(){
+        return noeudServeur != null;
+    }
+
+    public abstract void detruireValeurs();
+
+
 }

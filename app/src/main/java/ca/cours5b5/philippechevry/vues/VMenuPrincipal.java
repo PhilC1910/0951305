@@ -9,21 +9,12 @@ import ca.cours5b5.philippechevry.R;
 import ca.cours5b5.philippechevry.controleurs.Action;
 import ca.cours5b5.philippechevry.controleurs.ControleurAction;
 import ca.cours5b5.philippechevry.global.GCommande;
+import ca.cours5b5.philippechevry.usagers.UsagerCourant;
 
 
 public class VMenuPrincipal extends Vue {
 
-    private Button boutonParametres;
-    private Action actionParametres;
 
-    private Button boutonPartie;
-    private Action actionPartie;
-
-    private Button boutonPartieReseau ;
-    private Action actionPartieReseau;
-
-    private Button boutonConnexionFireBase;
-    private Action actionConnexionFireBase;
 
     public VMenuPrincipal(Context context) {
         super(context);
@@ -37,6 +28,20 @@ public class VMenuPrincipal extends Vue {
         super(context, attrs, defStyleAttr);
     }
 
+    private Button boutonParametres;
+    private Action actionParametres;
+
+    private Button boutonPartie;
+    private Action actionPartie;
+
+    private Button boutonPartieReseau;
+    private Action actionPartieReseau;
+
+    private Button boutonConnexion;
+    private Action actionConnexion;
+    private Action actionDeconnexion;
+
+
     @Override
     protected void onFinishInflate(){
         super.onFinishInflate();
@@ -47,6 +52,8 @@ public class VMenuPrincipal extends Vue {
 
         installerListeners();
 
+        ajusterTexteConnexionDeconnexion();
+
     }
 
 
@@ -55,8 +62,11 @@ public class VMenuPrincipal extends Vue {
         boutonParametres = findViewById(R.id.bouton_parametres);
 
         boutonPartie = findViewById(R.id.bouton_partie);
-        boutonConnexionFireBase = findViewById(R.id.buttonConnexion);
-        boutonPartieReseau = findViewById(R.id.bouton_partie_en_ligne);
+
+        boutonPartieReseau = findViewById(R.id.bouton_partie_reseau);
+
+        boutonConnexion = findViewById(R.id.bouton_connexion);
+
     }
 
     private void demanderActions() {
@@ -64,33 +74,18 @@ public class VMenuPrincipal extends Vue {
         actionParametres = ControleurAction.demanderAction(GCommande.OUVRIR_MENU_PARAMETRES);
 
         actionPartie = ControleurAction.demanderAction(GCommande.DEMARRER_PARTIE);
-        actionConnexionFireBase = ControleurAction.demanderAction(GCommande.CONNEXION_FIRE_BASE);
+
         actionPartieReseau = ControleurAction.demanderAction(GCommande.JOINDRE_OU_CREER_PARTIE_RESEAU);
+
+        actionConnexion = ControleurAction.demanderAction(GCommande.CONNEXION);
+
+        actionDeconnexion = ControleurAction.demanderAction(GCommande.DECONNEXION);
+
+
     }
 
 
     private void installerListeners() {
-
-        installerListenerParametres();
-
-        installerListenerPartie();
-        installerListenerConexion();
-        installerListenerPartieReseau();
-
-    }
-
-    private void installerListenerPartie() {
-
-        boutonPartie.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                actionPartie.executerDesQuePossible();
-            }
-        });
-
-    }
-
-    private void installerListenerParametres() {
 
         boutonParametres.setOnClickListener(new OnClickListener() {
             @Override
@@ -99,28 +94,51 @@ public class VMenuPrincipal extends Vue {
             }
         });
 
-    }
-
-    private void installerListenerConexion() {
-
-        boutonConnexionFireBase.setOnClickListener(new OnClickListener() {
+        boutonPartie.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                actionConnexionFireBase.executerDesQuePossible();
+            public void onClick(View v) {
+                actionPartie.executerDesQuePossible();
             }
         });
 
+        boutonPartieReseau.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionPartieReseau.executerDesQuePossible();
+            }
+        });
+
+        boutonConnexion.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!UsagerCourant.siUsagerConnecte()){
+
+                    actionConnexion.executerDesQuePossible();
+                    boutonConnexion.setText(R.string.deconnexion);
+
+                }else{
+
+                    actionDeconnexion.executerDesQuePossible();
+                    boutonConnexion.setText(R.string.connexion);
+
+                }
+
+            }
+        });
     }
 
-    private void installerListenerPartieReseau() {
 
-       boutonPartieReseau.setOnClickListener(new OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               actionPartieReseau.executerDesQuePossible();
-           }
-       });
+    private void ajusterTexteConnexionDeconnexion() {
+        if(UsagerCourant.siUsagerConnecte()){
 
+            boutonConnexion.setText(R.string.deconnexion);
+
+        }else{
+
+            boutonConnexion.setText(R.string.connexion);
+
+        }
     }
 
 }

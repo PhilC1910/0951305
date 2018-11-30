@@ -1,7 +1,7 @@
 package ca.cours5b5.philippechevry.modeles;
 
-import java.util.Map;
 
+import java.util.Map;
 import ca.cours5b5.philippechevry.controleurs.ControleurAction;
 import ca.cours5b5.philippechevry.controleurs.ControleurPartieReseau;
 import ca.cours5b5.philippechevry.controleurs.interfaces.Fournisseur;
@@ -9,87 +9,121 @@ import ca.cours5b5.philippechevry.controleurs.interfaces.ListenerFournisseur;
 import ca.cours5b5.philippechevry.exceptions.ErreurAction;
 import ca.cours5b5.philippechevry.exceptions.ErreurSerialisation;
 import ca.cours5b5.philippechevry.global.GCommande;
+import ca.cours5b5.philippechevry.global.GConstantes;
+import ca.cours5b5.philippechevry.global.GCouleur;
 import ca.cours5b5.philippechevry.serialisation.AttributSerialisable;
+import ca.cours5b5.philippechevry.usagers.UsagerCourant;
 
 public class MPartieReseau extends MPartie implements Fournisseur, Identifiable {
 
-@AttributSerialisable
-public String idJoueurInvite;
-private String _idJoueurInvite = "idJoueurInvite";
+    @AttributSerialisable
+    public String idJoueurInvite;
+    private String __idJoueurInvite = GConstantes.CLE_ID_JOUEUR_INVITE;
 
-@AttributSerialisable
-public String idJoueurHote;
-private String _idJoueurHote= "idJoueurHote";
-
+    @AttributSerialisable
+    public String idJoueurHote;
+    private String __idJoueurHote = GConstantes.CLE_ID_JOUEUR_HOTE;
 
     public MPartieReseau(MParametresPartie parametres) {
-
         super(parametres);
+
         fournirActionRecevoirCoup();
 
     }
 
-    @Override
-    public String getId() {
-        return idJoueurHote;
+
+    private void fournirActionRecevoirCoup() {
+
+        ControleurAction.fournirAction(this,
+                GCommande.RECEVOIR_COUP_RESEAU,
+                new ListenerFournisseur() {
+                    @Override
+                    public void executer(Object... args) {
+
+                        String idColonne = (String) args[0];
+                        recevoirCoupReseau(Integer.valueOf(idColonne));
+
+                    }
+                });
     }
 
-    private void fournirActionRecevoirCoup(){
-        ControleurAction.fournirAction(this,GCommande.RECEVOIR_COUP_RESEAU, new ListenerFournisseur() {
-            @Override
-            public void executer(Object... args) {
-
-                try {
-                    int colonne = Integer.parseInt((String)args[0]);
-
-
-                    recevoirCoupReseau( colonne);
-                }catch (ClassCastException e){
-                    throw new ErreurAction(e);
-                }
-
-
-            }
-        });
-    }
 
     @Override
     protected void fournirActionPlacerJeton() {
-        super.fournirActionPlacerJeton();
 
-        ControleurAction.fournirAction(this, GCommande.JOUER_COUP_ICI, new ListenerFournisseur() {
-            @Override
-            public void executer(Object... args) {
-                try {
+        ControleurAction.fournirAction(this,
+                GCommande.PLACER_JETON_ICI,
+                new ListenerFournisseur() {
 
-                    int colonne = (Integer) args[0];
+                    @Override
+                    public void executer(Object... args) {
+                        try{
 
-                    jouerCoup(colonne);
-                    ControleurPartieReseau.getInstance().transmettreCoup(colonne);
-                }catch (ClassCastException e){
-                    throw new ErreurAction(e);
-                }
-            }
-        });
+                            int colonne = (Integer) args[0];
+
+                            jouerCoup(colonne);
+
+
+                            ControleurPartieReseau.getInstance().transmettreCoup(colonne);
+
+
+                        }catch(ClassCastException e){
+
+                            throw new ErreurAction(e);
+
+                        }
+                    }
+                });
     }
+
 
     private void recevoirCoupReseau(int colonne){
-        jouerCoup(colonne);
+        if(super.siCoupLegal(colonne)){
+
+            super.jouerCoupLegal(colonne);
+
+        }
     }
+
+    
+    @Override
+    protected boolean siCoupLegal(int colonne) {
+
+        return super.siCoupLegal(colonne);
+
+    }
+
+
+    public void setIdJoueurs(String idJoueurHote, String idJoueurInvite){
+        this.idJoueurHote = idJoueurHote;
+        this.idJoueurInvite = idJoueurInvite;
+    }
+
 
     @Override
     public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurSerialisation {
         super.aPartirObjetJson(objetJson);
-idJoueurHote = (String) objetJson.get(_idJoueurHote);
-idJoueurInvite = (String) objetJson.get(_idJoueurInvite);
+
+        idJoueurHote = (String) objetJson.get(__idJoueurHote);
+        idJoueurInvite = (String) objetJson.get(__idJoueurInvite);
 
     }
+
 
     @Override
     public Map<String, Object> enObjetJson() throws ErreurSerialisation {
-        Map<String,Object> objectJson = super.enObjetJson();
-        objectJson.put(_idJoueurHote,idJoueurHote);
-        objectJson.put(_idJoueurInvite,idJoueurInvite);
-        return objectJson;
+        Map<String, Object> objetJson = super.enObjetJson();
+
+        objetJson.put(__idJoueurHote, idJoueurHote);
+        objetJson.put(__idJoueurInvite, idJoueurInvite);
+
+        return objetJson;
+
     }
+
+
+    public String getId() {
+        return idJoueurHote;
+    }
+
 }

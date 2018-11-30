@@ -1,22 +1,23 @@
 package ca.cours5b5.philippechevry.donnees;
 
+
 import java.util.Map;
 
+import ca.cours5b5.philippechevry.global.GConstantes;
 
 public abstract class SourceDeDonnees {
 
-    public abstract void  chargerModele(final String cheminSauvegarde, final ListenerChargement listenerChargement);
-    public abstract void  detruireSauvegarde(final String cheminSauvegarde);
+    public abstract void chargerModele(final String cheminSauvegarde, final ListenerChargement listenerChargement);
 
-    public abstract void sauvegarderModele(final String cheminSauvegarde, final Map<String, Object> objetJson);
+    public abstract void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson);
 
-    protected  String getNomModele(String cheminSauvegarde){
+    public abstract void detruireSauvegarde(String cheminSauvegarde);
 
-       String[] tabElementChemin =  cheminSauvegarde.split("/");
+    protected String getNomModele(String cheminSauvegarde){
 
-        return tabElementChemin[0] ;
+        return cheminSauvegarde.split(GConstantes.SEPARATEUR_DE_CHEMIN)[0];
+
     }
-
 
 
 }

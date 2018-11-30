@@ -15,6 +15,8 @@ import ca.cours5b5.philippechevry.serialisation.Jsonification;
 
 public final class Disque extends SourceDeDonnees {
 
+    private Disque(){}
+
     private static final Disque instance = new Disque();
 
     public static Disque getInstance() {
@@ -23,16 +25,14 @@ public final class Disque extends SourceDeDonnees {
 
     private File repertoireRacine;
 
-    private Disque() {}
 
     public void setRepertoireRacine(File repertoireRacine) {
-
         this.repertoireRacine = repertoireRacine;
-
     }
 
+
     @Override
-    public void chargerModele(String cheminSauvegarde,ListenerChargement listenerChargement) {
+    public void chargerModele(String cheminSauvegarde, ListenerChargement listenerChargement) {
 
         File fichier = getFichier(cheminSauvegarde);
 
@@ -42,11 +42,7 @@ public final class Disque extends SourceDeDonnees {
 
             Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
 
-          listenerChargement.reagirSucces(objetJson);
-
-        } catch (FileNotFoundException e) {
-
-            listenerChargement.reagirErreur(e);
+            listenerChargement.reagirSucces(objetJson);
 
         } catch (IOException e) {
 
@@ -55,10 +51,6 @@ public final class Disque extends SourceDeDonnees {
         }
     }
 
-    @Override
-    public void detruireSauvegarde(String cheminSauvegarde) {
-
-    }
 
     @Override
     public void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson) {
@@ -73,11 +65,14 @@ public final class Disque extends SourceDeDonnees {
 
             outputStream.write(json.getBytes());
 
+            outputStream.close();
+
         } catch (FileNotFoundException e) {
 
             Log.d("Atelier07", "File not found: " + cheminSauvegarde);
 
         } catch (IOException e) {
+
 
             Log.d("Atelier07", "IOException: " + cheminSauvegarde);
 
@@ -85,20 +80,31 @@ public final class Disque extends SourceDeDonnees {
     }
 
 
+    @Override
+    public void detruireSauvegarde(String cheminSauvegarde) {
+
+        File fichier = getFichier(cheminSauvegarde);
+        fichier.delete();
+
+    }
 
 
     private File getFichier(String cheminSauvegarde) {
-        String[] tabElementChemin = cheminSauvegarde.split("/");
-        String nomFichier =  tabElementChemin[0]+ ".json";
+
+        String nomModele = getNomModele(cheminSauvegarde);
+
+        String nomFichier = getNomFichier(nomModele);
 
         return new File(repertoireRacine, nomFichier);
 
     }
+
 
     private String getNomFichier(String nomModele) {
 
         return nomModele + GConstantes.EXTENSION_PAR_DEFAUT;
 
     }
+
 
 }
