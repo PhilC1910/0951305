@@ -6,6 +6,8 @@ import ca.cours5b5.philippechevry.exceptions.ErreurSerialisation;
 
 public class MJoueur extends Modele {
     
+
+
     @Override
     public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurSerialisation {
 

@@ -1,5 +1,7 @@
 package ca.cours5b5.philippechevry.modeles;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
