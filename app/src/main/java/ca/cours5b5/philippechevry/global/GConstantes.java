@@ -30,6 +30,7 @@ public final class GConstantes {
     public static final String CLE_COUPS_JOUEUR_HOTE = "coupsJoueurHote";
     public static final String CLE_COUPS_JOUEUR_INVITE = "coupsJoueurInvite";
 
+
     public static final int DELAIS_MESSAGE_AVEC_ACTION=2000;
 
 }

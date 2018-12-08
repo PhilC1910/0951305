@@ -29,6 +29,7 @@ public class MColonne extends Modele {
 
         jetons.add(new MJeton(couleur));
 
+
     }
 
 

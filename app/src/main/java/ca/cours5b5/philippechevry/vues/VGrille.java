@@ -5,11 +5,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
 
+import ca.cours5b5.philippechevry.R;
 import ca.cours5b5.philippechevry.controleurs.Action;
 import ca.cours5b5.philippechevry.controleurs.ControleurAction;
 import ca.cours5b5.philippechevry.global.GCommande;
@@ -40,7 +43,6 @@ public class VGrille extends GridLayout {
     private List<Colonne> colonnesDeCases;
 
     private Action actionEntete;
-
     private List<VEntete> entetes;
 
 
@@ -58,6 +60,7 @@ public class VGrille extends GridLayout {
     private void demanderActionEntete() {
 
         actionEntete = ControleurAction.demanderAction(GCommande.PLACER_JETON_ICI);
+
 
     }
 
@@ -130,13 +133,14 @@ public class VGrille extends GridLayout {
         return paramsEntete;
     }
 
-    private void installerListenerEntete(VEntete entete, final int colonne) {
+    private void installerListenerEntete(final VEntete entete, final int colonne) {
         entete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 actionEntete.setArguments(colonne);
                 actionEntete.executerDesQuePossible();
+
                 
             }
         });

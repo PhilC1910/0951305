@@ -20,9 +20,11 @@ public class MPartieReseau extends MPartie implements Fournisseur, Identifiable 
     public String idJoueurInvite;
     private String __idJoueurInvite = GConstantes.CLE_ID_JOUEUR_INVITE;
 
+
     @AttributSerialisable
     public String idJoueurHote;
     private String __idJoueurHote = GConstantes.CLE_ID_JOUEUR_HOTE;
+
 
     public MPartieReseau(MParametresPartie parametres) {
         super(parametres);
@@ -107,7 +109,8 @@ public class MPartieReseau extends MPartie implements Fournisseur, Identifiable 
         idJoueurHote = (String) objetJson.get(__idJoueurHote);
         idJoueurInvite = (String) objetJson.get(__idJoueurInvite);
 
-    }
+
+     }
 
 
     @Override

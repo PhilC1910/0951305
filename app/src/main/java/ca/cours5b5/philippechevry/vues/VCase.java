@@ -50,6 +50,10 @@ public class VCase extends AppCompatButton {
     public void afficherJeton(MJeton jeton) {
 
         afficherCouleurJeton(jeton);
+        Animation bounce = AnimationUtils.loadAnimation(getContext(),R.anim.bounce);
+        startAnimation(bounce);
+
+
 
     }
 
@@ -61,12 +65,12 @@ public class VCase extends AppCompatButton {
 
                 setBackgroundColor(getResources().getColor(R.color.ROUGE, null));
 
+
                 break;
 
             case JAUNE:
 
                 setBackgroundColor(getResources().getColor(R.color.JAUNE, null));
-
                 break;
 
         }
