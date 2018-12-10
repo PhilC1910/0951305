@@ -39,6 +39,8 @@ public class VCase extends AppCompatButton {
         initialiser();
     }
 
+
+
     private void initialiser() {
         
         setEnabled(false);
@@ -50,9 +52,9 @@ public class VCase extends AppCompatButton {
     public void afficherJeton(MJeton jeton) {
 
         afficherCouleurJeton(jeton);
-        
+
         Animation bounce = AnimationUtils.loadAnimation(getContext(),R.anim.bounce);
-        startAnimation(bounce);
+        this.startAnimation(bounce);
 
 
 

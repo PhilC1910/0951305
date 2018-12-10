@@ -8,6 +8,7 @@ import java.util.Map;
 import ca.cours5b5.philippechevry.exceptions.ErreurSerialisation;
 import ca.cours5b5.philippechevry.global.GCouleur;
 import ca.cours5b5.philippechevry.serialisation.AttributSerialisable;
+import ca.cours5b5.philippechevry.vues.VCase;
 
 public class MColonne extends Modele {
 
@@ -26,7 +27,7 @@ public class MColonne extends Modele {
 
 
     public void placerJeton(GCouleur couleur) {
-
+        
         jetons.add(new MJeton(couleur));
 
 
