@@ -27,7 +27,7 @@ public class MColonne extends Modele {
 
 
     public void placerJeton(GCouleur couleur) {
-        
+
         jetons.add(new MJeton(couleur));
 
 

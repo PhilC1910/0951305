@@ -3,10 +3,12 @@ package ca.cours5b5.philippechevry.activites;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +34,8 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
         setContentView(R.layout.activity_menu_principal);
 
         fournirActions();
+
+
 
     }
 
@@ -187,7 +191,14 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
 
             if (resultCode == RESULT_OK) {
 
+
                 // Connexion réussie
+
+
+                Log.d("Projet", "Écrire sur: MParametres/bxIfyak79LMxLgNmhd985sf2izr1/parametresPartie/hauteur");
+                FirebaseDatabase.getInstance().getReference("MParametres/bxIfyak79LMxLgNmhd985sf2izr1/parametresPartie/hauteur").setValue(5);
+
+
 
             } else {
 
